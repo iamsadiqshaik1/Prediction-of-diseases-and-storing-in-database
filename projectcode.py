@@ -5,7 +5,7 @@ import sqlite3
 import sys
 import time
 
-# from gui_stuff import *
+
 
  
 
@@ -46,7 +46,7 @@ l2=[]
 for x in range(0,len(l1)):
     l2.append(0)
 
-# TESTING DATA df -------------------------------------------------------------------------------------
+# TRAIN DATA 
 df=pd.read_csv("Training.csv")
 
 df.replace({'prognosis':{'Fungal infection':0,'Allergy':1,'GERD':2,'Chronic cholestasis':3,'Drug Reaction':4,
@@ -67,7 +67,7 @@ y = df[["prognosis"]]
 np.ravel(y)
 # print(y)
 
-# TRAINING DATA tr --------------------------------------------------------------------------------
+# TEST DATA  
 tr=pd.read_csv("Testing.csv")
 tr.replace({'prognosis':{'Fungal infection':0,'Allergy':1,'GERD':2,'Chronic cholestasis':3,'Drug Reaction':4,
 'Peptic ulcer diseae':5,'AIDS':6,'Diabetes ':7,'Gastroenteritis':8,'Bronchial Asthma':9,'Hypertension ':10,
@@ -91,12 +91,12 @@ def DecisionTree():
     clf3 = tree.DecisionTreeClassifier()   # empty model of the decision tree
     clf3 = clf3.fit(X,y)
 
-    # calculating accuracy-------------------------------------------------------------------
+    
     from sklearn.metrics import accuracy_score
     y_pred=clf3.predict(X_test)
     print(accuracy_score(y_test, y_pred))
     print(accuracy_score(y_test, y_pred,normalize=False))
-    # -----------------------------------------------------
+   
 
     psymptoms = [Symptom1.get(),Symptom2.get(),Symptom3.get(),Symptom4.get(),Symptom5.get()]
 
@@ -130,12 +130,12 @@ def randomforest():
     clf4 = RandomForestClassifier()
     clf4 = clf4.fit(X,np.ravel(y))
 
-    # calculating accuracy-------------------------------------------------------------------
+    
     from sklearn.metrics import accuracy_score
     y_pred=clf4.predict(X_test)
     print(accuracy_score(y_test, y_pred))
     print(accuracy_score(y_test, y_pred,normalize=False))
-    # -----------------------------------------------------
+    
 
     psymptoms = [Symptom1.get(),Symptom2.get(),Symptom3.get(),Symptom4.get(),Symptom5.get()]
 
@@ -167,12 +167,12 @@ def NaiveBayes():
     gnb = GaussianNB()
     gnb=gnb.fit(X,np.ravel(y))
 
-    # calculating accuracy-------------------------------------------------------------------
+   
     from sklearn.metrics import accuracy_score
     y_pred=gnb.predict(X_test)
     print(accuracy_score(y_test, y_pred))
     print(accuracy_score(y_test, y_pred,normalize=False))
-    # -----------------------------------------------------
+   
 
     psymptoms = [Symptom1.get(),Symptom2.get(),Symptom3.get(),Symptom4.get(),Symptom5.get()]
     for k in range(0,len(l1)):
@@ -197,12 +197,12 @@ def NaiveBayes():
         t3.delete("1.0", END)
         t3.insert(END, "Not Found")
 
-# gui_stuff------------------------------------------------------------------------------------
+# gui
 
 root=Tk()
 root.configure(background='blue')
 
-# entry variables
+# entry 
 Symptom1 = StringVar()
 Symptom1.set(None)
 Symptom2 = StringVar()
@@ -326,7 +326,7 @@ rnf.grid(row=9, column=3,padx=10)
 lr = Button(root, text="NaiveBayes", command=NaiveBayes,bg="green",fg="yellow")
 lr.grid(row=10, column=3,padx=10)
 
-#textfileds
+#text
 t1 = Text(root, height=1, width=40,bg="orange",fg="black")
 t1.grid(row=15, column=1, padx=10)
 
@@ -371,8 +371,9 @@ def tick():
 clock=Label(root, font=("times",20,"bold"),bg="blue")
 clock.grid(row=1,column=3)
 tick()
-
+#Title
 root.title("SATHYABAMA UNIVERSITY (HOSPITAL AND DENTAL CARE)")
+#logo
 root.iconbitmap('C:\\Users\\sadiq shaik\\Downloads\\sathyabama_institute_of_science_and_technology_logo_ico_xda_icon.ico')
 
 CAT = ['DR.A(Fungal infection)','DR.B(Allergy)','DR.C(GERD)','DR.D(Chronic cholestasis)','DR.E(Drug Reaction)',
@@ -392,3 +393,7 @@ w.grid(row=19,column=2)
 
 Button(root, text='Submit',width=20,bg='brown',fg='white',command=database).place(x=670,y=600)
 root.mainloop()
+
+
+
+
